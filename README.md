@@ -30,3 +30,6 @@ DeviceFileEvents
 | order by Timestamp desc
 | project Timestamp, DeviceName, ActionType, FileName, InitiatingProcessFolderPath, InitiatingProcessFileName
 ```
+<img width="1444" alt="Screenshot 1 Filename and ProcessFilename" src="https://github.com/user-attachments/assets/5169faa9-6403-4210-949a-86e95e2cc397" />
+
+
