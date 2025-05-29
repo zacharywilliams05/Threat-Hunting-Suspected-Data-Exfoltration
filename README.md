@@ -10,4 +10,4 @@ An employee named John Doe, working in a sensitive department, recently got put 
 
 **Activity:** Develop a hypothesis based on threat intelligence and security gaps (e.g., “Could there be lateral movement in the network?”).
 
-John is an administrator on his device and is not limited on which applications he uses. He may try to archive/compress sensitive information and send it to a private drive or something.
+John is an administrator on his device and is not limited on which applications he uses. He may try to archive/compress sensitive information and send it to a private drive, etc.
