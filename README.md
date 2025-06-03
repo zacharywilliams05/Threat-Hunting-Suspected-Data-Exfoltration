@@ -65,7 +65,10 @@ ___
 
 The previous KQL query revealed where the malicious script is stored. Viewing the script shows that indeed it was archiving data and uploading it outside of the network to "https://sacyberrangedanger.blob.core.windows.net/stolencompanydata/employee-data.zip"
 
-<img width="998" alt="Screenshot 3" src="https://github.com/user-attachments/assets/1d38c161-8a99-4ddb-aa8b-a8aad1724f85" />
+<img width="998" alt="Screenshot 3" src="https://github.com/user-attachments/assets/1d38c161-8a99-4ddb-aa8b-a8aad1724f85" /><br>
+<img width="968" alt="スクリーンショット 2025-05-29 11 57 48" src="https://github.com/user-attachments/assets/0bb7617d-704e-4511-bcb9-07a54ad091dd" /><br>
+<img width="885" alt="スクリーンショット 2025-05-29 11 58 45" src="https://github.com/user-attachments/assets/46520a20-48b3-45fa-beee-06dfee6321ce" /><br>
+
 ____
 
 Checking DeviceNetworkEvents for activity within 2 minutes before and 2 minutes after the script execution we can check for network activity to that URL.
@@ -80,7 +83,9 @@ DeviceNetworkEvents
 <img width="1420" alt="Screenshot 4" src="https://github.com/user-attachments/assets/7d07a2c6-403f-4dee-9513-613adb57d0f6" />
 
 
-The device indeed reach out to the URL and according to the script uploaded the archived employee data.
+The device successfully connected to the URL and according to the script uploaded the archived employee data.
+
+
 
 ___
 
