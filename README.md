@@ -32,4 +32,12 @@ DeviceFileEvents
 ```
 <img width="1444" alt="Screenshot 1 Filename and ProcessFilename" src="https://github.com/user-attachments/assets/5169faa9-6403-4210-949a-86e95e2cc397" />
 
+We see on 2025-05-21T04:49:41 GMT a file named "employee-data-20250521044933.zip" was created using 7z.exe (not shown in screenshot). This was then moved to a folder called "backup" in the Program Data folder. The naming of this file and folder is suspicious and we should investigate further into the process that created this file.
+
+This process was repeated on 5/26 which means we may be seeing a script running that is routinely zipping employee data and moving it to backup folder. 
+___
+
+
+
+
 
