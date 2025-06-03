@@ -37,8 +37,6 @@ We see on 2025-05-21T04:49:41 GMT a file named "employee-data-20250521044933.zip
 This process was repeated on 5/26 which means we may be seeing a script running that is routinely zipping employee data and moving it to backup folder. 
 ___
 
-___
-
 Looking at the DeviceProcessEvents we will see what activity took place two minutes before and two minutes after 2025-05-21T04:49:41 GMT.
 
 ```kql
@@ -65,10 +63,9 @@ Full URL: powershell.exe -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri
 
 ___
 
-The previous KQL query revealed where the malicious script is stored. Viewing the script shows that indeed it was archiving data and event uploading it outside of the network to "https://sacyberrangedanger.blob.core.windows.net/stolencompanydata/employee-data.zip"
+The previous KQL query revealed where the malicious script is stored. Viewing the script shows that indeed it was archiving data and uploading it outside of the network to "https://sacyberrangedanger.blob.core.windows.net/stolencompanydata/employee-data.zip"
 
-###Screenshot3###
-
+<img width="998" alt="Screenshot 3" src="https://github.com/user-attachments/assets/1d38c161-8a99-4ddb-aa8b-a8aad1724f85" />
 ____
 
 Checking DeviceNetworkEvents for activity within 2 minutes before and 2 minutes after the script execution we can check for network activity to that URL.
@@ -80,7 +77,8 @@ DeviceNetworkEvents
 | where DeviceName == suspectDevice and Timestamp between ((suspectedProcessTime - 2m) .. (suspectedProcessTime + 2m))
 ```
 
-###Screenshot4###
+<img width="1420" alt="Screenshot 4" src="https://github.com/user-attachments/assets/7d07a2c6-403f-4dee-9513-613adb57d0f6" />
+
 
 The device indeed reach out to the URL and according to the script uploaded the archived employee data.
 
